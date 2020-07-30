@@ -15,13 +15,16 @@
 		})
 		
 		const json = await res.json()
-        result = JSON.stringify(json)
-        dispatch('created', result);
+        dispatch('created', JSON.stringify(json));
     }
 </script>
 
-<div class="card">
-    <h1>Create a new Project</h1>
-    <input type="text" placeholder="Project name" bind:value={name}/>
-    <button type="button" class="btn btn-primary" on:click={createProject}>Create Project</button>
+<div class="card text-center">
+    <div class="card-body">
+        <h3 class="mb-4">Create a new Project</h3>
+        <div class="d-flex flex-column">
+            <input class="mb-2" type="text" placeholder="Project name" bind:value={name}/>
+            <button type="button" class="btn btn-primary" on:click={createProject}>Create Project</button>
+        </div>
+    </div>
 </div>
