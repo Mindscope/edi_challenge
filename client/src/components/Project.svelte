@@ -8,12 +8,27 @@
   let doneTasks = [],
     todoTasks = [];
   let newTaskDescription;
+  let isEditing = false;
 
-  async function deleteProject(event) {
+  async function deleteProject() {
     const projectId = project._id;
     const url = baseUrl + `/${project._id}`;
     const res = await fetch(url, { method: "DELETE" });
     dispatch("deleted", { name: projectId });
+  }
+
+  async function updateProject() {
+    isEditing = false;
+    const url = baseUrl + `/${project._id}`;
+    const res = await fetch(url, {
+      method: "PUT",
+      body: JSON.stringify({ name: project.name }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const result = await res.json();
+    dispatch("updated", result);
   }
 
   async function updateTasks() {
@@ -100,9 +115,17 @@
 {#if project}
   <div class="card">
     <div class="card-header d-flex">
-      {project.name}
+      {#if isEditing}
+        <input class="edit" type="text" bind:value={project.name} />
+      {:else}
+        <span>{project.name}</span>
+      {/if}
       <div class="ml-auto">
-        <i class="tool fas fa-edit" />
+        {#if !isEditing}
+          <i class="tool fas fa-edit" on:click={() => {isEditing = true}}/>
+        {:else}
+          <i class="fas fa-check-square" on:click={updateProject} />
+        {/if}
         <i class="tool far fa-trash-alt" on:click={deleteProject} />
       </div>
     </div>
@@ -111,7 +134,11 @@
         <h4>To Do</h4>
         <div class="task-list">
           {#each todoTasks as task}
-            <Task {task} on:delete={deleteTask} on:finish={finishTask} on:update={updateTask}/>
+            <Task
+              {task}
+              on:delete={deleteTask}
+              on:finish={finishTask}
+              on:update={updateTask} />
           {/each}
         </div>
       {/if}
@@ -121,7 +148,7 @@
           {#each doneTasks as task}
             <Task {task} />
           {/each}
-        </div>        
+        </div>
       {/if}
     </div>
     <div class="card-footer">

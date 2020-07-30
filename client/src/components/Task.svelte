@@ -22,7 +22,7 @@
 
   .edit {
       margin-left: 0.5rem;
-  }
+  }  
 </style>
 
 {#if task}
