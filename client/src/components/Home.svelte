@@ -4,6 +4,7 @@
   import CreateProject from "./CreateProject.svelte";
 
   const baseUrl = "http://localhost:8081/api/projects";
+  export let user;
   let projects = [];
 
   async function refreshProjects() {
