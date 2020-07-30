@@ -19,6 +19,10 @@
   .completed-desc {
     padding-left: 0.5rem;
   }
+
+  .edit {
+      margin-left: 0.5rem;
+  }
 </style>
 
 {#if task}
@@ -29,7 +33,7 @@
         checked={task.is_complete}
         on:click={() => dispatch('finish', { id: task._id })} />
       {#if isEditing}
-        <input type="text" bind:value={task.description} />        
+        <input class="edit" type="text" bind:value={task.description} />        
       {:else}
         <span class="pl-2 pr-3">{task.description}</span>
       {/if}
