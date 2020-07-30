@@ -27,5 +27,6 @@ app.use(cors());app.set('views', __dirname)
 //app.use('/api', require('./customers/router'))
 app.use('/api/projects', require('./app/projects/router'))
 app.use('/api/auth', require('./app/auth/router'))
+app.use('/api/users', require('./app/users/router'))
 
 module.exports = app

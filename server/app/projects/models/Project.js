@@ -7,12 +7,10 @@ const taskSchema = mongoose.Schema({
   finished_at: {type: Date}
 });
 
-const projectSchema = mongoose.Schema({
-  name: {
-    type: String,
-    required: true
-  },
+const ProjectSchema = mongoose.Schema({
+  name: {type: String, required: true},
+  author: {type: String, required: true},
   tasks: [taskSchema]
 });
-var Project = mongoose.model("Project", projectSchema);
-module.exports = Project;
+
+module.exports = mongoose.model("Project", ProjectSchema);

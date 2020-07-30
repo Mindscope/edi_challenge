@@ -11,7 +11,7 @@ exports.login = async (req, res) => {
     user.comparePassword(password, (err, isMatch) => {
         if (err) throw err;
         if (!isMatch) res.status(403).json({err: "Not allowed"})
-        else res.status(200).json({username: user.username}); 
+        else res.status(200).json({id: user._id, username: user.username}); 
     });
   } catch (err) {
     res.status(500).json({ error: err });

@@ -13,7 +13,8 @@ exports.allProjects = async (req, res) => {
 exports.addProject = async (req, res) => {
   try {
     const project = new Project({
-      name: req.body.name      
+      name: req.body.name,
+      author: req.body.author      
     });
     let newProject = await project.save();
     res.status(200).json({ data: newProject });
@@ -41,3 +42,12 @@ exports.updateProject = async (req, res) => {
     res.status(500).json(err);
   }
 };
+
+exports.getUserProjects = async (req, res) => {
+  try {
+    let projects = await Project.find({author: req.params.userId});
+    res.status(200).json(projects);
+  } catch (err) {
+    res.status(500).json(err);
+  }  
+}
