@@ -1,0 +1,9 @@
+{
+	"env": {
+        "SERVER_PORT": "8081",
+        "MONGODB_PORT": "27017",
+        "MONGODB_HOST": "mongo",
+		"DATABASE_CONNECTIONSTRING": "mongodb://mongo:27017/todo_list",
+		"SESSION_SECRET": "qsdlka^sbasf7q2&radsfanv(ak923#4234asdfvaad*98)8asd!f2r$vas100as"
+	}
+}
