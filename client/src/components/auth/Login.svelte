@@ -14,19 +14,20 @@
             },
         });
         const result = await res.json();
-        console.log(result);
-        authStore.set({status: "in", user: result});
+        if (result.error === undefined) authStore.set({status: "in", user: result});
     }
 </script>
 
-<div>
-    <label for="username">
-        Username
-        <input type="text" id="username" bind:value={username}/>
-    </label>    
-    <label for="password1">
-        Password
-        <input type="password" id="password1" bind:value={password} />
-    </label>
-    <button class="btn btn-primary" on:click={login}>Login</button>
-</div>
+<form class="container">
+    <div class="form-group d-flex flex-column justify-content-center">
+        <label for="username">
+            Username
+            <input type="text" id="username" bind:value={username}/>
+        </label>    
+        <label for="password1">
+            Password
+            <input type="password" id="password1" bind:value={password} />
+        </label>
+        <button class="btn btn-primary" on:click={login}>Login</button>
+    </div>
+</form>
