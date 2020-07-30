@@ -1,0 +1,25 @@
+version: "3"
+services:
+    api:
+        container_name: api
+        restart: always
+        build: ./server/
+        ports:
+            - 8081:8081
+        links:
+            - mongo
+        volumes:
+            - ./server:/code
+
+mongo:
+    container_name: mongo
+    image: mongo
+    volumes:
+        - db-data:/data/db
+        - mongo-config:/data/configdb
+    ports:
+        - 27017:27017
+
+volumes:
+    db-data:
+    mongo-config:
