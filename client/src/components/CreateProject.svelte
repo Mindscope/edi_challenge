@@ -1,14 +1,22 @@
 <script>
     import { createEventDispatcher } from 'svelte';
+    import { urls } from "../config";
+    import { authStore } from "../stores/auth";
 
-    const baseUrl = "http://localhost:8081/api/projects";
+    const baseUrl = urls.base + urls.projects;
     const dispatch = createEventDispatcher();
     let name;
+    let userId;
     
+    authStore.subscribe((data) => {
+        if (data.user !== undefined) userId = data.user.id
+        else userId = undefined;
+    });
+
     async function createProject(event) {
         const res = await fetch(baseUrl, {
 			method: 'POST',
-            body: JSON.stringify({name}),
+            body: JSON.stringify({name, author: userId}),
             headers: {
                 'Content-Type': 'application/json'                
             },

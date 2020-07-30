@@ -1,8 +1,9 @@
 <script>
   import { createEventDispatcher } from "svelte";
+  import { urls } from "../config";
   import Task from "./Task.svelte";
 
-  const baseUrl = "http://localhost:8081/api/projects";
+  const baseUrl = urls.base + urls.projects;
   const dispatch = createEventDispatcher();
   export let project;
   let doneTasks = [],

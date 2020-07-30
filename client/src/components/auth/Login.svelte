@@ -5,7 +5,7 @@
     let username, password;
 
     async function login() {
-        const url = urls.auth + "/login";
+        const url = urls.base + urls.auth + "/login";
         let res = await fetch(url, {
             method: "POST",
             body: JSON.stringify({ username, password }),
