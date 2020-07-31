@@ -115,6 +115,14 @@
   .task-list {
     margin-bottom: 2rem;
   }
+
+  .tool {
+    cursor: pointer;    
+  }
+
+  .tool:hover {
+    color: blue;
+  }
 </style>
 
 {#if project}

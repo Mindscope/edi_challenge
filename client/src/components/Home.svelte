@@ -18,8 +18,7 @@
 
   async function refreshProjects() {
     let res = await fetch(url + `/${userId}/projects`);
-    projects = await res.json();
-    console.log(projects);    
+    projects = await res.json();    
   }
 
   onMount(refreshProjects);

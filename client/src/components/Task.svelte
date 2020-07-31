@@ -22,7 +22,15 @@
 
   .edit {
       margin-left: 0.5rem;
-  }  
+  } 
+
+  .tool {
+    cursor: pointer;    
+  }
+
+  .tool:hover {
+    color: blue;
+  } 
 </style>
 
 {#if task}
