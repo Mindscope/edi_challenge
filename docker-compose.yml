@@ -6,6 +6,7 @@ services:
         build: ./client/
         ports:
             - 5000:5000
+            - 35729:35729
         links:
             - api
         environment: 
