@@ -1,6 +1,6 @@
 module.exports = {
     urls: {
-        base: "http://localhost:8081/api",
+        base: "http://api:8081/api",
         auth: "/auth",
         users: "/users",
         projects: "/projects"

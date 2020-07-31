@@ -1,5 +1,17 @@
 version: "3"
 services:
+    app:
+        container_name: app
+        restart: always
+        build: ./client/
+        ports:
+            - 5000:5000
+        links:
+            - api
+        environment: 
+            - HOST=0.0.0.0
+        volumes:
+            - ./client:/code    
     api:
         container_name: api
         restart: always

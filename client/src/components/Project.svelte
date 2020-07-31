@@ -36,7 +36,13 @@
     console.log(`Fetching tasks for ${project._id}`);
     const url = baseUrl + `/${project._id}/tasks`;
     let res = await fetch(url);
-    res.json().then((tasks) => sortTasks(tasks));
+    res.json().then((tasks) => update(tasks));
+  }
+
+  function update(tasks) {
+    sortTasks(tasks);
+    // Setup tooltips for done tasks elements
+    window.$("[data-toggle]").tooltip();
   }
 
   function sortTasks(tasks) {
@@ -48,9 +54,6 @@
         else todoTasks.push(task);
       });
     }
-
-    // Setup tooltips for done tasks elements
-    window.$("[data-toggle]").tooltip();
   }
 
   async function addTask() {
@@ -67,7 +70,7 @@
         "Content-Type": "application/json",
       },
     });
-    res.json().then((tasks) => sortTasks(tasks));
+    res.json().then((tasks) => update(tasks));
     newTaskDescription = "";
   }
 
@@ -75,7 +78,7 @@
     const id = event.detail.id;
     const url = baseUrl + `/${project._id}/tasks/${id}`;
     const res = await fetch(url, { method: "DELETE" });
-    res.json().then((tasks) => sortTasks(tasks));
+    res.json().then((tasks) => update(tasks));
   }
 
   async function finishTask(event) {
@@ -88,7 +91,7 @@
         "Content-Type": "application/json",
       },
     });
-    res.json().then((tasks) => sortTasks(tasks));
+    res.json().then((tasks) => update(tasks));
   }
 
   async function updateTask(event) {
@@ -101,9 +104,10 @@
         "Content-Type": "application/json",
       },
     });
-    res.json().then((tasks) => sortTasks(tasks));
+    res.json().then((tasks) => update(tasks));
   }
 
+  // Only update tasks list when project is loaded.
   $: project && updateTasks();
 </script>
 
@@ -123,7 +127,11 @@
       {/if}
       <div class="ml-auto">
         {#if !isEditing}
-          <i class="tool fas fa-edit" on:click={() => {isEditing = true}}/>
+          <i
+            class="tool fas fa-edit"
+            on:click={() => {
+              isEditing = true;
+            }} />
         {:else}
           <i class="fas fa-check-square" on:click={updateProject} />
         {/if}
